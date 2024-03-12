@@ -10,8 +10,10 @@ Scanner scanner = new Scanner(System.in);
 Socket socket = new Socket("localhost", 2245);
 
 while(true) {
+//prompt for information
 System.out.println("Enter member name or 'quit' to exit:");
 String name = scanner.nextLine();
+//exit loop
 if(name.equalsIgnoreCase("quit")) {
 break;
 
