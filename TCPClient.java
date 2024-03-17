@@ -1,3 +1,4 @@
+//Re-wrote some parts to align with the Week 2 examples. Added indentation. 
 package FitnessClub;
 
 import java.io.*;
@@ -5,25 +6,25 @@ import java.net.*;
 import java.util.Scanner;
 
 public class TCPClient {
-public static void main(String[] args){
-Scanner scanner = new Scanner(System.in);
-Socket socket = new Socket("localhost", 2245);
 
-while(true) {
-//prompt for information
-System.out.println("Enter member name or 'quit' to exit:");
-String name = scanner.nextLine();
-//exit loop
-if(name.equalsIgnoreCase("quit")) {
-break;
+    public static void main(String[] args) {
+        Scanner scanner = null; // Declare a Scanner object to read user input.
+        Socket socket = null; // Declare a Socket object to establish a TCP connection.
+        try {
+            String hostName = "localhost"; // The server's hostname.
+            int serverPort = 2245; // The port number on which the server is listening.
+            socket = new Socket(hostName, serverPort); // Establishing connection to the server.
+            scanner = new Scanner(System.in); // Initialising the scanner to read from system's input.
 
-//not 100% working
-System.out.println("Enter Name:");
-System.out.println("Enter Last name:");
-System.out.println("Enter address:");
-            }
-			
-//Need to make this neater. Need to ask for first name and last name and address sweparately, and add so the user can change if needed. 
+		// Handle exceptions related to the host of the server being unknown.
+        } catch (UnknownHostException e) {
+            System.out.println("Sock:" + e.getMessage()); 
+        // Handle I/O exceptions that may occur during use.
+		} catch (IOException e) {
+            System.out.println("IO:" + e.getMessage()); 
+		// Close the scanner and socket in the finally block to ensure they are closed.
+        } finally {
         }
     }
 }
+// TO DO: Data transmission logic and user interaction.
