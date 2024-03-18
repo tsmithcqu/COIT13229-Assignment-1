@@ -13,7 +13,11 @@ public class TCPServer {
             int serverPort = 2245; // Server will listen on this port number.
             ServerSocket listenSocket = new ServerSocket(serverPort); // Create a server socket bound to the specified port above.
 
-            // Listening loop not yet handling client data, just connections.
+ while (true) { 
+                Socket clientSocket = listenSocket.accept(); // Accepts client connections.
+                System.out.println("Client connected"); // Message to notify that client has connected.
+                executor.submit(new ClientHandler(clientSocket)); 
+ }
 		// Handle general I/O exceptions.
         } catch (IOException e) {
             System.out.println("Listen :" + e.getMessage()); // Basic error handling, needs more detail.
