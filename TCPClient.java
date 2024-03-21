@@ -18,8 +18,9 @@ public class TCPClient {
 
             // Entering a loop to send multiple member data until 'quit' command is provided.
             while (true) {
-                System.out.println("Enter 'quit' to exit:"); // Inform the user how to quit the program..
-		if ("quit".equalsIgnoreCase(name)) break; // Exiting the loop if user enters 'quit'.
+                System.out.println("Enter 'quit' to exit or press Enter to continue:"); // Inform the user how to quit the program..
+		String quit = scanner.nextLine(); // Reading quit.
+                if ("quit".equalsIgnoreCase(quit)) break; // Exiting the loop if user enters 'quit'.
 		    
 		System.out.println("Enter name:"); // Prompt for entering memebr's name.
                 String name = scanner.nextLine(); // Reading the member's name.
