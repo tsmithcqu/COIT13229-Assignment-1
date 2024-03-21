@@ -62,3 +62,5 @@ class Connection extends Thread {
 
 
 //To do: Add Timer Function
+//To Do: Add functionality to write to Member.txt. 
+// To Do: Need to send confirmation message back to the client. Will need to modify TCPClient to display this message. 
