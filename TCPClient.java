@@ -1,4 +1,3 @@
-//Re-wrote some parts to align with the Week 2 examples. Added indentation. 
 package FitnessClub;
 
 import java.io.*;
@@ -11,17 +10,35 @@ public class TCPClient {
         Scanner scanner = null; // Declare a Scanner object to read user input.
         Socket socket = null; // Declare a Socket object to establish a TCP connection.
         try {
-            String hostName = "localhost"; // The server's hostname.
-            int serverPort = 2245; // The port number on which the server is listening.
-            socket = new Socket(hostName, serverPort); // Establishing connection to the server.
-            scanner = new Scanner(System.in); // Initialising the scanner to read from system's input.
+            int serverPort = 1145; // The port number on which the server is listening.
+            socket = new Socket("localhost", serverPort); // Establishing connection to the server running on 'localhost' and the server port above.
+            scanner = new Scanner(System.in); // Initialising the scanner for user input.
+            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream()); // Preparing the ObjectOutputStream for sending data to the server.
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream()); // Preparing the ObjectInputStream for receiving data from the server.
 
-		while (true) {
-                System.out.println("Enter member name or 'quit' to exit:"); // Prompt user to enter text.
-                String name = scanner.nextLine();
-                if (name.equalsIgnoreCase("quit")) { // If the user types "quit", exit the program. 
-                    break; 
-                }
+            // Entering a loop to send multiple member data until 'quit' command is provided.
+            while (true) {
+                System.out.println("Enter 'quit' to exit:"); // Inform the user how to quit the program..
+		if ("quit".equalsIgnoreCase(name)) break; // Exiting the loop if user enters 'quit'.
+		    
+		System.out.println("Enter name:"); // Prompt for entering memebr's name.
+                String name = scanner.nextLine(); // Reading the member's name.
+                
+                System.out.println("Enter address:"); // Prompt for entering member's address.
+                String address = scanner.nextLine(); // Reading the member's address.
+
+                System.out.println("Enter phone number:"); // Prompt for entering member's phone number.
+                String phone = scanner.nextLine(); // Reading the member's phone number.
+
+                // Creating a new Member object with user-provided information.
+                Member member = new Member(name, address, phone);
+                // Sending the Member object to the server.
+                out.writeObject(member);
+                // Waiting for and receiving the response from the server.
+                Member response = (Member) in.readObject();
+                // Displaying the server's response.
+                System.out.println("Server Response: " + response);
+            }
 			
 		// Handle exceptions related to the host of the server being unknown.
         } catch (UnknownHostException e) {
@@ -34,4 +51,6 @@ public class TCPClient {
         }
     }
 }
-// TO DO: Data transmission logic and user interaction.
+// TO DO: Need to check for user inputs, and dont allow blank input. Not sure how. 
+// TO DO: Need to allow the user to re-enter details if required. 
+// TO DO: Should the loop stay open to constantly accept client name, number, address, etc? 
