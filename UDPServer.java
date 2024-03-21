@@ -1,3 +1,5 @@
+package FitnessClub;
+
 import java.net.*;
 
 public class UDPServer {
