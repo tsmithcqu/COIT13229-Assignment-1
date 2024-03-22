@@ -47,8 +47,10 @@ class Connection extends Thread {
         try {
             Member member = (Member) in.readObject(); // Read a Member object from the client.
             synchronized (this) { // Synchronising to handle one client at a time.
-                System.out.println("Received member data: " + member); // Display the received member object here.
-                out.writeObject(member); // Respond to the client with the processed information.
+		//Writing the member details to a text file.
+		FileWriter fw = new FileWriter("memberlist.txt", true); // Open the file in append mode.
+                outToFile.println(member.toString()); // Write the member details to the file.
+                outToFile.close(); // Close the file writer
             	}
 	}
 }
@@ -62,5 +64,6 @@ class Connection extends Thread {
 
 
 //To do: Add Timer Function
-//To Do: Add functionality to write to Member.txt. 
 // To Do: Need to send confirmation message back to the client. Will need to modify TCPClient to display this message. 
+// To Do: Add functionality to print 'saved successfully', and also send client a message stating it has been saved. 
+// To Do: Need to work out functionality to check if the file exists first, then writing to it.
