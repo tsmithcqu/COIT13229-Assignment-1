@@ -20,9 +20,12 @@ public class UDPServer {
                 String fileName = new String(request.getData(), 0, request.getLength());
                 System.out.println("File requested by Client: " + fileName);
             }
+        } catch (SocketException e) {
+        System.out.println("Socket: " + e.getMessage());
+        } catch (IOException e) {
+        System.out.println("IO: " + e.getMessage());
         }
     }
 }
 
 //To Do: send back to client. 
-//To Do: Exception handling. 
