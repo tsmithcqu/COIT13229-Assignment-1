@@ -30,9 +30,13 @@ public class UDPClient {
             
             // Send the request to the server
             aSocket.send(request);
+
+            } catch (SocketException e) {
+            System.out.println("Socket: " + e.getMessage());
+            } catch (IOException e) {
+            System.out.println("IO: " + e.getMessage());
         }
     }
 }
 
 //TO DO: Add server response. 
-//To Do: Add exception handling. 
