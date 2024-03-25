@@ -49,7 +49,9 @@ class Connection extends Thread {
             synchronized (this) { // Synchronising to handle one client at a time.
 		//Writing the member details to a text file.
 		FileWriter fw = new FileWriter("memberlist.txt", true); // Open the file in append mode.
-                outToFile.println(member.toString()); // Write the member details to the file.
+                BufferedWriter bw = new BufferedWriter(fw); // Wrap FileWriter in BufferedWriter for efficient writing.
+		PrintWriter outToFile = new PrintWriter(bw); // Wrap BufferedWriter in PrintWriter for easy text output.
+		outToFile.println(member.toString()); // Write the member details to the file.
                 outToFile.close(); // Close the file writer
             	}
 	}
