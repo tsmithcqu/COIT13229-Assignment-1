@@ -50,4 +50,3 @@ public class UDPClient {
     }
 }
 
-//TO DO: Add server response. 
