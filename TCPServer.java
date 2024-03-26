@@ -11,7 +11,7 @@ public class TCPServer {
     private static java.util.Timer serializationTimer = new java.util.Timer();
 	
     public static void main(String[] args) {
-        ExecutorService threadPool = null;
+        ExecutorService threadPool = null; // Executor service for managing threads
 
         try {
             int serverPort = 1145; // Server will listen on this port number.
@@ -60,12 +60,18 @@ class Connection extends Thread {
 		PrintWriter outToFile = new PrintWriter(bw); // Wrap BufferedWriter in PrintWriter for easy text output.
 		outToFile.println(member.toString()); // Write the member details to the file.
                 outToFile.close(); // Close the file writer
+
+		// Notify that member data has been received and saved
+                System.out.println("Received and saved member data: " + member);
+
+                // Sending confirmation back to client
+                out.writeObject("Member details received and saved successfully.");
             	}
 	}
 }
 	// Handle general I/O exceptions.
           catch (IOException e) {
-            System.out.println("Listen :" + e.getMessage()); // Basic error handling, needs more detail.
+            System.out.println("IO :" + e.getMessage()); // Basic error handling, needs more detail.
         } finally {
         }
     }
