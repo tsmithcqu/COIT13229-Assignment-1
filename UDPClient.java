@@ -31,6 +31,17 @@ public class UDPClient {
             // Send the request to the server
             aSocket.send(request);
 
+            // Prepare a buffer to receive the response.
+            byte[] buffer = new byte[1000];  
+            
+            // Waiting for response.
+            DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
+            aSocket.receive(reply);
+            
+            // Display the response.
+            String response = new String(reply.getData(), 0, reply.getLength());
+            System.out.println("Server Response: " + response);
+
             } catch (SocketException e) {
             System.out.println("Socket: " + e.getMessage());
             } catch (IOException e) {
