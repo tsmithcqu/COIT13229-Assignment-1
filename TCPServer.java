@@ -103,5 +103,4 @@ class MemberListSerialization extends TimerTask {
     }
 }
 
-// To Do: Need to send confirmation message back to the client. Will need to modify TCPClient to display this message. 
-// To Do: Add functionality to print 'saved successfully', and also send client a message stating it has been saved. 
+//To Do: Make better with exception handling. 
