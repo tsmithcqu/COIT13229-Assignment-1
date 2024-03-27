@@ -30,7 +30,7 @@ public class TCPServer {
 
         } catch (IOException e) { // Catch and handle exceptions related to input/output operations.
             System.out.println("Listen socket:" + e.getMessage());
-        } 
+        }  
     }
 }
 
@@ -66,13 +66,17 @@ class Connection extends Thread {
 
                 // Sending confirmation back to client
                 out.writeObject("Member details received and saved successfully.");
-            	}
-	}
-}
-	// Handle general I/O exceptions.
-          catch (IOException e) {
-            System.out.println("IO :" + e.getMessage()); // Basic error handling, needs more detail.
-        } finally {
+		}
+        	} catch (EOFException e) { // Catch and handle EOFException
+            	    System.out.println("EOF:" + e.getMessage());
+        	} catch (IOException e) { // Catch and handle IOException
+            	    System.out.println("IO:" + e.getMessage());
+        	} finally {
+            	try {
+                    if (clientSocket != null) clientSocket.close(); // Close client socket if it's not null.
+            	    } catch (IOException e) { // Catch and handle IOException during socket close.
+                        System.out.println("Close failed:" + e.getMessage());
+            }
         }
     }
 }
@@ -102,5 +106,3 @@ class MemberListSerialization extends TimerTask {
         }
     }
 }
-
-//To Do: Make better with exception handling. 
