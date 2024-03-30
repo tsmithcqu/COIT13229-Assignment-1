@@ -2,6 +2,8 @@ package FitnessClub;
 
 import java.net.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UDPServer {
     public static void main(String args[]) {
