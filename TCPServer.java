@@ -9,8 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class TCPServer {
-    // Initialises a Timer for scheduling tasks. 
-    private static java.util.Timer serializationTimer = new java.util.Timer();
+    private static java.util.Timer serializationTimer = new java.util.Timer(); // Initialises a Timer for scheduling tasks. 
 	
     public static void main(String[] args) {
         ExecutorService threadPool = null; // Executor service for managing threads
@@ -21,9 +20,8 @@ public class TCPServer {
             threadPool = Executors.newCachedThreadPool(); // Thread pool for managing client connections.
             System.out.println("TCP Server is running..."); // Notification that server is successfully running.
 
-            // Schedule the task for serialising member list to run every 2 seconds starting immediately.
-            serializationTimer.schedule(new MemberListSerialization(), 0, 2000);
-		
+            serializationTimer.schedule(new MemberListSerialization(), 0, 2000); // Schedule the task for serialising member list to run every 2 seconds starting immediately.
+
             while (true) { // Infinite loop to continuously accept new client connections.
                 Socket clientSocket = listenSocket.accept(); // Accepts client connections.
 		System.out.println("Client connected"); // Message to notify that client has connected.
@@ -63,11 +61,10 @@ class Connection extends Thread {
 		outToFile.println(member.toString()); // Write the member details to the file.
                 outToFile.close(); // Close the file writer
 
-		// Notify that member data has been received and saved
-                System.out.println("Received and saved member data: " + member);
+                System.out.println("Received and saved member data: " + member); // Notify that member data has been received and saved
 
-                // Sending confirmation back to client
-                out.writeObject("Member details received and saved successfully.");
+                out.writeObject("Member details received and saved successfully."); // Sending confirmation back to client
+
 		}
         	} catch (EOFException e) { // Catch and handle EOFException
             	    System.out.println("EOF:" + e.getMessage());
@@ -95,14 +92,13 @@ class MemberListSerialization extends TimerTask {
             }
             reader.close(); // Close the reader.
 
-            // Serialising the member list.
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("memberlistObject"));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("memberlistObject")); // Serialising the member list.
             oos.writeObject(memberList); // Write the member list object to the file.
             oos.close(); // Close the ObjectOutputStream.
             
             System.out.println("Member list serialised successfully"); // Notification of successful serialisation.
 
-		// The exception handling code is developed by me. 
+	// The exception handling code is developed by me. 
         } catch (IOException e) { // Catch and handle exceptions related to input/output operations
             System.out.println("Serialisation IO Exception: " + e.getMessage());
         }
