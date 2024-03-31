@@ -54,6 +54,4 @@ public class TCPClient {
         }
     }
 }
-// TO DO: Need to check for user inputs, and dont allow blank input. Not sure how. 
-// TO DO: Need to allow the user to re-enter details if required. 
-// TO DO: Should the loop stay open to constantly accept client name, number, address, etc? 
+
