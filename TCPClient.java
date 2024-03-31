@@ -33,24 +33,19 @@ public class TCPClient {
                 System.out.println("Enter phone number:"); // Prompt for entering member's phone number.
                 String phone = scanner.nextLine(); // Reading the member's phone number.
 
-                // Creating a new Member object with user-provided information.
-                Member member = new Member(name, address, phone);
-                // Sending the Member object to the server.
-                out.writeObject(member);
-                // Waiting for and receiving the response from the server.
-                Member response = (Member) in.readObject();
-                // Displaying the server's response.
-                System.out.println("Server Response: " + response);
+                Member member = new Member(name, address, phone); // Creating a new Member object with user-provided information.
+                out.writeObject(member); // Sending the Member object to the server.
+                Member response = (Member) in.readObject(); // Waiting for and receiving the response from the server.
+                System.out.println("Server Response: " + response); // Displaying the server's response.
             }
 			
-		// Handle exceptions related to the host of the server being unknown.
+	// Handle exceptions related to the host of the server being unknown.
         } catch (UnknownHostException e) {
-            System.out.println("Sock:" + e.getMessage()); 
+            System.out.println("Unknown Host:" + e.getMessage()); 
         // Handle I/O exceptions that may occur during use.
-		} catch (IOException e) {
+	} catch (IOException e) {
             System.out.println("IO:" + e.getMessage()); 
-		// Close the scanner and socket in the finally block to ensure they are closed.
-        } finally {
+        } finally { // Close the scanner and socket in the finally block to ensure they are closed.
         }
     }
 }
