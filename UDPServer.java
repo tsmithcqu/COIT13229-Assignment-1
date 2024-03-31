@@ -10,6 +10,7 @@ public class UDPServer {
         DatagramSocket aSocket = null;
         try {
             aSocket = new DatagramSocket(2245); // Create a UDP socket bound to the specified port. 
+            System.out.println("UDP Server is running..."); // Notification that server is successfully running.
             
             while (true) {
                 byte[] buffer = new byte[1000];  // Buffer for receiving incoming requests.
